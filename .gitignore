@@ -7,7 +7,6 @@
 
 # dependencies
 /node_modules
-!/node_modules/p5/*
 
 # IDEs and editors
 /.idea
