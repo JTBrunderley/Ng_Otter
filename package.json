@@ -4,14 +4,12 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start-ng": "ng serve",
-    "start-server": "node ./src/server/server.js",
-    "start": "concurrently --kill-others \"npm run start-server\" \"npm run start-ng\"",
+    "start": "node server.js",
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "compodoc": "./node_modules/.bin/compodoc src --disableCoverage -p src/tsconfig.app.json"
+    "postinstall": "ng build --aot -prod"
   },
   "private": true,
   "dependencies": {
@@ -25,6 +23,9 @@
     "@angular/platform-browser-dynamic": "^5.2.5",
     "@angular/router": "^5.2.5",
     "@auth0/angular-jwt": "^1.0.0-beta.9",
+    "@angular/cli": "^1.7.0",
+    "@angular/compiler-cli": "^5.2.5",
+    "typescript": ">=2.6.0 <2.7.0",
     "classlist.js": "^1.1.20150312",
     "concurrently": "^3.5.1",
     "core-js": "^2.5.3",
@@ -39,9 +40,10 @@
     "primeng": "^5.2.0",
     "quill": "^1.3.5",
     "rxjs": "^5.5.6",
-    "twit": "^2.2.9",
     "web-animations-js": "^2.3.1",
-    "zone.js": "^0.8.20"
+    "zone.js": "^0.8.20",
+    "p5": "latest",
+    "twit": "latest"
   },
   "devDependencies": {
     "@angular/cli": "^1.7.0",
@@ -70,5 +72,9 @@
     "typescript": ">=2.6.0 <2.7.0",
     "p5": "latest",
     "twit": "latest"
+  },
+  "engines": {
+    "node": "8.9.4",
+    "npm": "5.7.1"
   }
 }

@@ -62,8 +62,6 @@ export class AppComponent implements OnInit, OnDestroy {
         this.place = 'Over The Ocean';
       } else if (data.display_name) {
         this.place = data.display_name;
-      } else {
-        this.place = 'Unknown';
       }
     });
   }

@@ -6,17 +6,18 @@ const app = express();
 const router = express.Router();
 const twitterService = new twit(twitConfig);
 
-const port = 4201;
+const port = 8080;
 
-app.use('/otter-api', router);
+app.use('/otter-api', router, express.static(__dirname + '/dist'));
+
+app.listen(port, function() {
+	  console.log('Server Started On Port: ' + port);
+	});
 
 router.get('/tweets', function(req, res){
-	
 	var lat = req.query.lat;
 	var lon = req.query.lon;
-	
 	var query = "geocode:" + lat + "," + lon + ",100mi -from:googuns_lulz -from:_grammar_ -jeff_steinport";
-
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	twitterService.get('search/tweets',{q: query, count: 12}, function(err, data, response){
@@ -31,9 +32,8 @@ router.get('/tweets', function(req, res){
 		if (err){ console.log(err) };
   });
 });
-app.listen(port, function() {
-  console.log('Javascript Server Started On Port: ' + port);
-});
+
+
 
 
 
