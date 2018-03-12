@@ -122,7 +122,7 @@ export class AppComponent implements OnInit, OnDestroy {
 //       const timer = Observable.timer(0, 2000);
          const timer = Observable.timer(0);
       refTimer = timer.subscribe(() => {
-        p.loadJSON('https://api.open-notify.org/iss-now.json', gotLatLon);
+        p.loadJSON('http://api.open-notify.org/iss-now.json', gotLatLon);
       });
     }
     function gotLatLon(data: IssObject) {
