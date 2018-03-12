@@ -68,11 +68,11 @@ export class AppComponent implements OnInit, OnDestroy {
 
 
   getTweets() {
-   this.restService.getTweets(this.iss_lat, this.iss_lon).subscribe((datas: Tweet[]) => {
-     this.tweets = datas;
-     this.loading = false; } );
-//     this.tweets = [{user: 'temp', tweet: 'tweet'}];
-//     this.loading = false;
+//   this.restService.getTweets(this.iss_lat, this.iss_lon).subscribe((datas: Tweet[]) => {
+//     this.tweets = datas;
+//     this.loading = false; } );
+     this.tweets = [{user: 'temp', tweet: 'tweet'}];
+     this.loading = false;
   }
 
 
