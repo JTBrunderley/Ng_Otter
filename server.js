@@ -1,4 +1,5 @@
 const express = require('express');
+const http = require('http');
 const twit = require('twit');
 const twitConfig = require("./twitConfig");
 
@@ -6,15 +7,16 @@ const app = express();
 const router = express.Router();
 const twitterService = new twit(twitConfig);
 
-const port = 8080;
+const port = process.env.PORT || 8080;
 
 //app.use('/otter-api', router, express.static(__dirname + '/dist'));
 
 app.use(express.static(__dirname + '/dist'));
 
-app.listen(port, function() {
-	  console.log('Server Started On Port: ' + port);
-	});
+app.set('port', port);
+
+const server = http.createServer(app)l
+server.listen(port, () => console.log('Server is now Running'));
 
 //router.get('/tweets', function(req, res){
 //	var lat = req.query.lat;
