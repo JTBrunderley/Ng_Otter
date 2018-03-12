@@ -15,7 +15,7 @@ app.use(express.static(__dirname + '/dist'));
 
 app.set('port', port);
 
-const server = http.createServer(app)l
+const server = http.createServer(app);
 server.listen(port, () => console.log('Server is now Running'));
 
 //router.get('/tweets', function(req, res){
