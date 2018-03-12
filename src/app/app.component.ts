@@ -131,5 +131,5 @@ export class AppComponent implements OnInit, OnDestroy {
 //       y = r * 1.0625 * p.sin(-lat);
 //       z = r * p.cos(lat) * p.cos(lon + p.radians(180));
 //     }
-//   }
+  }
 }
