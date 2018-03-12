@@ -49,21 +49,24 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   updateIss() {
-    this.restService.getIss().subscribe((iss: IssObject) => {
-      this.iss_lat = iss.iss_position.latitude;
-      this.iss_lon = iss.iss_position.longitude;
+//     this.restService.getIss().subscribe((iss: IssObject) => {
+//       this.iss_lat = iss.iss_position.latitude;
+//       this.iss_lon = iss.iss_position.longitude;
       this.updatePlace();
-    });
+      this.iss_lat = 42.6436796;
+      this.iss_lon = -73.7047763;
+//     });
   }
 
   updatePlace() {
-    this.restService.getPlace(this.iss_lat, this.iss_lon).subscribe((data: any) => {
-      if (data.error) {
-        this.place = 'Over The Ocean';
-      } else if (data.display_name) {
-        this.place = data.display_name;
-      }
-    });
+//     this.restService.getPlace(this.iss_lat, this.iss_lon).subscribe((data: any) => {
+//       if (data.error) {
+//         this.place = 'Over The Ocean';
+//       } else if (data.display_name) {
+//         this.place = data.display_name;
+//       }
+//     });
+    this.place = 'test';
   }
 
 
@@ -93,7 +96,9 @@ export class AppComponent implements OnInit, OnDestroy {
       p.frameRate(60);
       const canvas: any = p.createCanvas(600, 475, p.WEBGL);
       canvas.parent('map');
-      refresh();
+//       refresh();
+      lat = 42.6436796;
+      lon = -73.7047763;
     };
     p.draw = function () {
       p.background(0, 0, 0, 0);
@@ -109,19 +114,19 @@ export class AppComponent implements OnInit, OnDestroy {
       const d = p.map(p.sin((p.frameCount / 200) * p.TAU), -1, 1, 1, 4);
       p.sphere(d);
     };
-    function refresh() {
-      const timer = Observable.timer(0, 2000);
-      refTimer = timer.subscribe(() => {
-        p.loadJSON('http://api.open-notify.org/iss-now.json', gotLatLon);
-      });
-    }
-    function gotLatLon(data: IssObject) {
-      const r = p.width / 3;
-      lat = p.radians(data.iss_position.latitude);
-      lon = p.radians(data.iss_position.longitude);
-      x = r * p.cos(lat) * p.sin(lon + p.radians(180));
-      y = r * 1.0625 * p.sin(-lat);
-      z = r * p.cos(lat) * p.cos(lon + p.radians(180));
-    }
+//     function refresh() {
+//       const timer = Observable.timer(0, 2000);
+//       refTimer = timer.subscribe(() => {
+//         p.loadJSON('http://api.open-notify.org/iss-now.json', gotLatLon);
+//       });
+//     }
+//     function gotLatLon(data: IssObject) {
+//       const r = p.width / 3;
+//       lat = p.radians(data.iss_position.latitude);
+//       lon = p.radians(data.iss_position.longitude);
+//       x = r * p.cos(lat) * p.sin(lon + p.radians(180));
+//       y = r * 1.0625 * p.sin(-lat);
+//       z = r * p.cos(lat) * p.cos(lon + p.radians(180));
+//     }
   }
 }
