@@ -119,7 +119,8 @@ export class AppComponent implements OnInit, OnDestroy {
       p.sphere(d);
     };
     function refresh() {
-      const timer = Observable.timer(0, 2000);
+//       const timer = Observable.timer(0, 2000);
+         const timer = Observable.timer(0);
       refTimer = timer.subscribe(() => {
         p.loadJSON('http://api.open-notify.org/iss-now.json', gotLatLon);
       });
