@@ -72,6 +72,7 @@ export class AppComponent implements OnInit, OnDestroy {
 //      this.tweets = datas;
 //      this.loading = false; } );
     this.tweets = [{user: 'temp', tweet: 'tweet'}];
+    this.loading = false;
   }
 
 
