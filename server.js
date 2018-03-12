@@ -10,7 +10,8 @@ const twitterService = new twit(twitConfig);
 const port = process.env.PORT || 8080;
 
 //app.use(express.static(__dirname + '/dist'));
-app.use('/otter-api', router, express.static(__dirname + '/dist'));
+app.use('/otter-api', router);
+app.use(express.static(__dirname + '/dist'));
 
 app.get('*', (req, res) => {
 	  res.sendFile(path.join(__dirname, 'dist/index.html'));
