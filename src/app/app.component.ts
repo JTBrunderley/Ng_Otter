@@ -68,11 +68,11 @@ export class AppComponent implements OnInit, OnDestroy {
 
 
   getTweets() {
-//    this.restService.getTweets(this.iss_lat, this.iss_lon).subscribe((datas: Tweet[]) => {
-//      this.tweets = datas;
-//      this.loading = false; } );
-    this.tweets = [{user: 'temp', tweet: 'tweet'}];
-    this.loading = false;
+   this.restService.getTweets(this.iss_lat, this.iss_lon).subscribe((datas: Tweet[]) => {
+     this.tweets = datas;
+     this.loading = false; } );
+//     this.tweets = [{user: 'temp', tweet: 'tweet'}];
+//     this.loading = false;
   }
 
 
@@ -94,12 +94,6 @@ export class AppComponent implements OnInit, OnDestroy {
       const canvas: any = p.createCanvas(600, 475, p.WEBGL);
       canvas.parent('map');
       refresh();
-//       lat = p.radians(42.6436796);
-//       lon = p.radians(-73.7047763);
-//       const r = p.width / 3;
-//       x = r * p.cos(lat) * p.sin(lon + p.radians(180));
-//       y = r * 1.0625 * p.sin(-lat);
-//       z = r * p.cos(lat) * p.cos(lon + p.radians(180));
     };
     p.draw = function () {
       p.background(0, 0, 0, 0);
