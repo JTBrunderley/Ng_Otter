@@ -52,21 +52,20 @@ export class AppComponent implements OnInit, OnDestroy {
 //     this.restService.getIss().subscribe((iss: IssObject) => {
 //       this.iss_lat = iss.iss_position.latitude;
 //       this.iss_lon = iss.iss_position.longitude;
-      this.updatePlace();
       this.iss_lat = 42.6436796;
       this.iss_lon = -73.7047763;
+      this.updatePlace();
 //     });
   }
 
   updatePlace() {
-//     this.restService.getPlace(this.iss_lat, this.iss_lon).subscribe((data: any) => {
-//       if (data.error) {
-//         this.place = 'Over The Ocean';
-//       } else if (data.display_name) {
-//         this.place = data.display_name;
-//       }
-//     });
-    this.place = 'test';
+    this.restService.getPlace(this.iss_lat, this.iss_lon).subscribe((data: any) => {
+      if (data.error) {
+        this.place = 'Over The Ocean';
+      } else if (data.display_name) {
+        this.place = data.display_name;
+      }
+    });
   }
 
 
