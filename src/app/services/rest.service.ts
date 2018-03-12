@@ -15,10 +15,10 @@ export class RestService {
   getPlace(lat: number, lon: number): Observable<any> {
     return this.http.get<any>(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`);
   }
-//  getTweets(lat: number, lon: number): Observable<Tweet[]> {
-//    return this.http.get<any>(`http://localhost:8080/otter-api/tweets?lat=${lat}&lon=${lon}`);
-//    
-//  }
+ getTweets(lat: number, lon: number): Observable<Tweet[]> {
+   return this.http.get<any>(`https://localhost:8080/otter-api/tweets?lat=${lat}&lon=${lon}`);
+   
+ }
   
 }
 
