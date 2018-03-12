@@ -97,8 +97,8 @@ export class AppComponent implements OnInit, OnDestroy {
       const canvas: any = p.createCanvas(600, 475, p.WEBGL);
       canvas.parent('map');
 //       refresh();
-      lat = 42.6436796;
-      lon = -73.7047763;
+      lat = p.radians(42.6436796);
+      lon = p.radians(-73.7047763);
       const r = p.width / 3;
       x = r * p.cos(lat) * p.sin(lon + p.radians(180));
       y = r * 1.0625 * p.sin(-lat);
