@@ -10,7 +10,7 @@ export class RestService {
 
   }
   getIss(): Observable<IssObject> {
-    return this.http.get<IssObject>(`http://api.open-notify.org/iss-now.json`);
+    return this.http.get<IssObject>(`https://api.wheretheiss.at/v1/satellites/25544`);
   }
   getPlace(lat: number, lon: number): Observable<any> {
     return this.http.get<any>(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`);
