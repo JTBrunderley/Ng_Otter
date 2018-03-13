@@ -23,26 +23,26 @@ app.listen(8080);
 
 router.get('/tweets', function(req, res){
   
-  fetch('https://api.wheretheiss.at/v1/satellites/25544')
-    .then(response => response.json())
-    .then(data => {
-        res.json({user: 'test' , tweet: data.timestamp});
-    });
+//   fetch('https://api.wheretheiss.at/v1/satellites/25544')
+//     .then(response => response.json())
+//     .then(data => {
+//         res.json({user: 'test' , tweet: data.timestamp});
+//     });
   
-// 	var lat = req.query.lat;
-// 	var lon = req.query.lon;
-// 	var query = "geocode:" + lat + "," + lon + ",100mi -from:googuns_lulz -from:_grammar_ -jeff_steinport";
-// 	twitterService.get('search/tweets',{q: query, count: 12}, function(err, data, response){
-// 		var tweets = [];
-// 		if (data){
-// 			for (var i = 0; i < data.statuses.length; i++){
-// 				tweets.push({user: data.statuses[i].user.screen_name , tweet: data.statuses[i].text});
-// 			}
-// 			if (data.statuses.length == 0) {tweets.push({user:"OTTER_SYS", tweet: 'No New Tweets Located'});}
-// 			res.json(tweets);
-// 		} 
-// 		if (err){ console.log(err) };
-//  });
+	var lat = req.query.lat;
+	var lon = req.query.lon;
+	var query = "geocode:" + lat + "," + lon + ",100mi -from:googuns_lulz -from:_grammar_ -jeff_steinport";
+	twitterService.get('search/tweets',{q: query, count: 12}, function(err, data, response){
+		var tweets = [];
+		if (data){
+			for (var i = 0; i < data.statuses.length; i++){
+				tweets.push({user: data.statuses[i].user.screen_name , tweet: data.statuses[i].text});
+			}
+			if (data.statuses.length == 0) {tweets.push({user:"OTTER_SYS", tweet: 'No New Tweets Located'});}
+			res.json(tweets);
+		} 
+		if (err){ console.log(err) };
+ });
 });
 
 
