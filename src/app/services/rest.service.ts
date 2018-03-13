@@ -16,7 +16,7 @@ export class RestService {
     return this.http.get<any>(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`);
   }
  getTweets(lat: number, lon: number): Observable<Tweet[]> {
-   return this.http.get<any>(`https://localhost:8080/otter-api/tweets?lat=${lat}&lon=${lon}`);
+   return this.http.get<any>(`https://ng-otter.herokuapp.com/otter-api/tweets?lat=${lat}&lon=${lon}`);
  }
 }
 
