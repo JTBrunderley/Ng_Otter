@@ -25,8 +25,8 @@ router.get('/tweets', function(req, res){
 	var lat = req.query.lat;
 	var lon = req.query.lon;
 	var query = "geocode:" + lat + "," + lon + ",100mi -from:googuns_lulz -from:_grammar_ -jeff_steinport";
-	res.header("Access-Control-Allow-Origin", "*");
-	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//	res.header("Access-Control-Allow-Origin", "*");
+//	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	twitterService.get('search/tweets',{q: query, count: 12}, function(err, data, response){
 		var tweets = [];
 		if (data){
