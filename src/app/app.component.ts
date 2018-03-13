@@ -33,7 +33,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.tweets = new Array<Tweet>();
     this.loading = true;
     this.p5Instance = new p5(this.sketch);
-    const twit_timer = Observable.timer(500, 10000);
+    const twit_timer = Observable.timer(0, 12000);
     const iss_timer = Observable.timer(0, 3000);
     this.refreshIssPos = iss_timer.subscribe(() => {
       this.updateIss();
@@ -110,7 +110,7 @@ export class AppComponent implements OnInit, OnDestroy {
       p.sphere(d);
     };
     function refresh() {
-      const timer = Observable.timer(500, 3000);
+      const timer = Observable.timer(0, 3000);
       refTimer = timer.subscribe(() => {
         p.loadJSON('https://api.wheretheiss.at/v1/satellites/25544', gotLatLon);
       });
