@@ -25,7 +25,7 @@ export class AppComponent implements OnInit, OnDestroy {
   refreshPos: Subscription;
   refreshDisplay: Subscription;
   position: PositionObj;
-  tweets: Tweet{};
+  tweets: Tweet[];
   place: string;
   loading: boolean;
 
