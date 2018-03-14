@@ -87,7 +87,7 @@ router.get('/display', function(req, res){
 
 router.get('/position', function(req, res){
 	  
-	let posObj = {lat: lat, lon: lon};
+	let posObj = {latitude: lat, longitude: lon};
 	res.json(posObj);
 
 });
