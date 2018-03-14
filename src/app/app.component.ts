@@ -32,7 +32,7 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.place = '';
     this.loading = false;
-    this.p5Instance = new p5(this.sketch);
+//     this.p5Instance = new p5(this.sketch);
     const display_timer = Observable.timer(0, 12000);
     const pos_timer = Observable.timer(0, 3000);
     this.refreshPos = pos_timer.subscribe(() => {
@@ -60,6 +60,7 @@ export class AppComponent implements OnInit, OnDestroy {
   updatePos() {
   this.restService.getPosition().subscribe( (data: PositionObj) => {
     this.position = data;
+    console.log(1);
   });
   }
 
