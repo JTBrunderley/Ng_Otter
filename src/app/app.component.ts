@@ -26,12 +26,9 @@ export class AppComponent implements OnInit, OnDestroy {
   refreshDisplay: Subscription;
   position: PositionObj;
   display: DisplayObj;
-  place: string;
-  tweets: Tweet[];
   loading: boolean;
 
   ngOnInit() {
-    this.tweets = new Array<Tweet>();
     this.loading = true;
     this.p5Instance = new p5(this.sketch);
     const display_timer = Observable.timer(0, 12000);
@@ -104,8 +101,8 @@ export class AppComponent implements OnInit, OnDestroy {
     }
     function gotLatLon(data: PositionObj) {
       const r = p.width / 3;
-      lat = p.radians(data.lat);
-      lon = p.radians(data.lon);
+      lat = p.radians(data.latitude);
+      lon = p.radians(data.longitude);
       x = r * p.cos(lat) * p.sin(lon + p.radians(180));
       y = r * 1.0625 * p.sin(-lat);
       z = r * p.cos(lat) * p.cos(lon + p.radians(180));
