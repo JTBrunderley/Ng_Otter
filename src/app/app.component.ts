@@ -25,7 +25,8 @@ export class AppComponent implements OnInit, OnDestroy {
   refreshPos: Subscription;
   refreshDisplay: Subscription;
   position: PositionObj;
-  display: DisplayObj;
+  tweets: Tweet{};
+  place: string;
   loading: boolean;
 
   ngOnInit() {
@@ -49,7 +50,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
   updateDisplay() {
   this.restService.getDisplay().subscribe( (data: DisplayObj) => {
-    this.display = data;
+    this.tweets = data.tweets;
+    this.place = data.place;
     this.loading = false;
   });
   }
