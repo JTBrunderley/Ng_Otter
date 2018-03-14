@@ -30,17 +30,16 @@ export class AppComponent implements OnInit, OnDestroy {
   loading: boolean;
 
   ngOnInit() {
-    this.place = '';
     this.loading = false;
     this.p5Instance = new p5(this.sketch);
-    const display_timer = Observable.timer(0, 12000);
-    const pos_timer = Observable.timer(0, 3000);
-    this.refreshPos = pos_timer.subscribe(() => {
-      this.updatePos();
-    });
-    this.refreshDisplay = display_timer.subscribe(() => {
-      this.updateDisplay();
-    });
+//     const display_timer = Observable.timer(0, 12000);
+//     const pos_timer = Observable.timer(0, 3000);
+//     this.refreshPos = pos_timer.subscribe(() => {
+//       this.updatePos();
+//     });
+//     this.refreshDisplay = display_timer.subscribe(() => {
+//       this.updateDisplay();
+//     });
   }
 
   ngOnDestroy() {
@@ -49,19 +48,19 @@ export class AppComponent implements OnInit, OnDestroy {
     this.refreshDisplay.unsubscribe();
   }
 
-  updateDisplay() {
-  this.restService.getDisplay().subscribe( (data: DisplayObj) => {
-    this.tweets = data.tweets;
-    this.place = data.place;
-    this.loading = false;
-  });
-  }
+//   updateDisplay() {
+//   this.restService.getDisplay().subscribe( (data: DisplayObj) => {
+//     this.tweets = data.tweets;
+//     this.place = data.place;
+//     this.loading = false;
+//   });
+//   }
 
-  updatePos() {
-  this.restService.getPosition().subscribe( (data: PositionObj) => {
-    this.position = data;
-  });
-  }
+//   updatePos() {
+//   this.restService.getPosition().subscribe( (data: PositionObj) => {
+//     this.position = data;
+//   });
+//   }
 
 
   sketch(p: p5) {
