@@ -46,16 +46,16 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.p5Instance.remove();
     this.refreshPos.unsubscribe();
-    this.refreshDisplay.unsubscribe();
+//     this.refreshDisplay.unsubscribe();
   }
 
-  updateDisplay() {
-  this.restService.getDisplay().subscribe( (data: DisplayObj) => {
-    this.tweets = data.tweets;
-    this.place = data.place;
-    this.loading = false;
-  });
-  }
+//   updateDisplay() {
+//   this.restService.getDisplay().subscribe( (data: DisplayObj) => {
+//     this.tweets = data.tweets;
+//     this.place = data.place;
+//     this.loading = false;
+//   });
+//   }
 
   updatePos() {
   this.restService.getPosition().subscribe( (data: PositionObj) => {
