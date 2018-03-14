@@ -50,6 +50,7 @@ export class AppComponent implements OnInit, OnDestroy {
   updateDisplay() {
   this.restService.getDisplay().subscribe( (data: DisplayObj) => {
     this.display = data;
+    this.loading = false;
   });
   }
 
