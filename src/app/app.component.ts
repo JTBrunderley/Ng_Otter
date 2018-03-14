@@ -24,7 +24,8 @@ export class AppComponent implements OnInit, OnDestroy {
   p5Instance: p5;
   refreshPos: Subscription;
   refreshDisplay: Subscription;
-  position: PositionObj;
+  lat: number;
+  lon: number;
   tweets: Tweet[];
   place: string;
   loading: boolean;
@@ -58,7 +59,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
   updatePos() {
   this.restService.getPosition().subscribe( (data: PositionObj) => {
-    this.position = data;
+    this.lat = data.latitude;
+    this.lon = data.longitude;
   });
   }
 
