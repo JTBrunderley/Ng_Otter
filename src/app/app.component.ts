@@ -21,13 +21,13 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(public restService: RestService) {
   }
 
-  p5Instance: p5;
-  refreshPos: Subscription;
-  refreshDisplay: Subscription;
-  position: PositionObj;
-  tweets: Tweet[];
-  place: string;
-  loading: boolean;
+//   p5Instance: p5;
+//   refreshPos: Subscription;
+//   refreshDisplay: Subscription;
+//   position: PositionObj;
+//   tweets: Tweet[];
+//   place: string;
+//   loading: boolean;
 
   ngOnInit() {
     this.loading = false;
