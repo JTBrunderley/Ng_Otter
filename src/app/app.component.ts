@@ -31,16 +31,16 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.place = '';
-    this.loading = true;
+    this.loading = false;
     this.p5Instance = new p5(this.sketch);
     const display_timer = Observable.timer(0, 12000);
     const pos_timer = Observable.timer(0, 3000);
     this.refreshPos = pos_timer.subscribe(() => {
       this.updatePos();
     });
-    this.refreshDisplay = display_timer.subscribe(() => {
-      this.updateDisplay();
-    });
+//     this.refreshDisplay = display_timer.subscribe(() => {
+//       this.updateDisplay();
+//     });
   }
 
   ngOnDestroy() {
