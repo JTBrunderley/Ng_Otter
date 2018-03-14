@@ -33,7 +33,7 @@ setInterval(updateTweets, 10 * 1000);
 function updateIss(){
 	
 	 request('https://api.wheretheiss.at/v1/satellites/25544', { json: true }, (err, res, body) => {
-		 if(err){console.log(err);}
+		 if(err){console.log(1,err);}
 		 if(body){
 			 lat = body.latitude;
 			 lon = body.longitude;
@@ -50,7 +50,7 @@ function updateIss(){
 function updatePlace(){
 	
 	 request('https://nominatim.openstreetmap.org/reverse?lat=' + lat + '&lon=' + lon + '&format=json', { json: true }, (err, res, body) => {
-		 if(err){console.log(err);}
+		 if(err){console.log(2,err);}
 		 if(body){
 			 if (body.error) {
 			        place = 'Over The Ocean';
@@ -73,7 +73,7 @@ function updateTweets(){
 			if (data.statuses.length == 0) {newtweets.push({user:"OTTER_SYS", tweet: 'No New Tweets Located'});}
 			tweets = newtweets;
 		} 
-		if (err){ console.log(err) };
+		if (err){ console.log(3,err) };
  });
 	
 }
