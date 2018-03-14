@@ -60,7 +60,6 @@ export class AppComponent implements OnInit, OnDestroy {
   updatePos() {
   this.restService.getPosition().subscribe( (data: PositionObj) => {
     this.position = data;
-    console.log(1);
   });
   }
 
