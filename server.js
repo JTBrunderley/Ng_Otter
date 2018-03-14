@@ -64,7 +64,7 @@ function updatePlace(){
 
 function updateTweets(){
 	
-	var query = "geocode:" + lat + "," + lon + ",100mi -from:googuns_lulz -from:_grammar_ -jeff_steinport";
+	var query = "geocode:" + lat + "," + lon + ",100mi -from:googuns_lulz -from:_grammar_ -from:jeff_steinport -from:donkaare";
 	twitterService.get('search/tweets',{q: query, count: 12}, function(err, data, response){
 		var newtweets = [];
 		if (data){
