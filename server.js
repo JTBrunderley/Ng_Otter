@@ -58,7 +58,7 @@ function updatePlace(){
 			        place = body.display_name;
 			      }
 		 }
-      if(place == "";){place = 'end';}
+//       if(place == "";){place = 'end';}
 	 });
 }
 
