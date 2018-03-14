@@ -24,7 +24,7 @@ var lat = 0;
 var lon = 0;
 var init = 0;
 
-// updateIss();
+updateIss();
 
 setInterval(updateIss, 1 * 1000);
 setInterval(updatePlace, 10 * 1000);
@@ -78,19 +78,19 @@ function updateTweets(){
 	
 }
 
-// router.get('/display', function(req, res){
+router.get('/display', function(req, res){
   
-// 	let displayObj = {place: place, tweets: tweets};
-// 	res.json(displayObj);
+	let displayObj = {place: place, tweets: tweets};
+	res.json(displayObj);
 
-// });
+});
 
-// router.get('/position', function(req, res){
+router.get('/position', function(req, res){
 	  
-// 	let posObj = {latitude: lat, longitude: lon};
-// 	res.json(posObj);
+	let posObj = {latitude: lat, longitude: lon};
+	res.json(posObj);
 
-// });
+});
 
 
 
