@@ -31,8 +31,8 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.loading = true;
     this.p5Instance = new p5(this.sketch);
-    const display_timer = Observable.timer(2000, 12000);
-    const pos_timer = Observable.timer(1000, 3000);
+    const display_timer = Observable.timer(0, 12000);
+    const pos_timer = Observable.timer(0, 3000);
     this.refreshPos = pos_timer.subscribe(() => {
       this.updatePos();
     });
