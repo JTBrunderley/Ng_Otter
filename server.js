@@ -28,7 +28,7 @@ var init = 0;
 
 setInterval(updateIss, 1 * 1000);
 // setInterval(updatePlace, 10 * 1000);
-// setInterval(updateTweets, 10 * 1000);
+setInterval(updateTweets, 10 * 1000);
 
 function updateIss(){
 	
@@ -40,7 +40,7 @@ function updateIss(){
 			 
 			 if(init == 0){
 // 				 updatePlace();
-// 				 updateTweets();
+				 updateTweets();
 				 init = 1;
 			 }
 		 }
@@ -61,22 +61,22 @@ function updateIss(){
 // 	 });
 // }
 
-// function updateTweets(){
+function updateTweets(){
 	
-// 	var query = "geocode:" + lat + "," + lon + ",100mi -from:googuns_lulz -from:_grammar_ -jeff_steinport";
-// 	twitterService.get('search/tweets',{q: query, count: 12}, function(err, data, response){
-// 		var newtweets = [];
-// 		if (data){
-// 			for (var i = 0; i < data.statuses.length; i++){
-// 				newtweets.push({user: data.statuses[i].user.screen_name , tweet: data.statuses[i].text});
-// 			}
-// 			if (data.statuses.length == 0) {newtweets.push({user:"OTTER_SYS", tweet: 'No New Tweets Located'});}
-// 			tweets = newtweets;
-// 		} 
-// 		if (err){ console.log(3,err) };
-//  });
+	var query = "geocode:" + lat + "," + lon + ",100mi -from:googuns_lulz -from:_grammar_ -jeff_steinport";
+	twitterService.get('search/tweets',{q: query, count: 12}, function(err, data, response){
+		var newtweets = [];
+		if (data){
+			for (var i = 0; i < data.statuses.length; i++){
+				newtweets.push({user: data.statuses[i].user.screen_name , tweet: data.statuses[i].text});
+			}
+			if (data.statuses.length == 0) {newtweets.push({user:"OTTER_SYS", tweet: 'No New Tweets Located'});}
+			tweets = newtweets;
+		} 
+		if (err){ console.log(3,err) };
+ });
 	
-// }
+}
 
 // router.get('/display', function(req, res){
   
