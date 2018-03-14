@@ -50,7 +50,7 @@ function updateIss(){
 function updatePlace(){
 	
 	 request('https://nominatim.openstreetmap.org/reverse?lat=' + lat + '&lon=' + lon + '&format=json', { json: true }, (err, res, body) => {
-		 if(err){place = 'error;}
+		 if(err){place = 'error';}
 		 if(body){
 			 if (body.error) {
 			        place = 'Over The Ocean';
