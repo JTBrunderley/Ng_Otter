@@ -19,7 +19,7 @@ app.get('*', (req, res) => {
 app.listen(8080);
 
 var tweets = [];
-var place = "";
+var place;
 var lat = 0;
 var lon = 0;
 var init = 0;
@@ -50,15 +50,18 @@ function updateIss(){
 function updatePlace(){
 	
 	 request('https://nominatim.openstreetmap.org/reverse?lat=' + lat + '&lon=' + lon + '&format=json', { json: true }, (err, res, body) => {
-		 if(err){place = 'error';}
+		 if(err){place = err;}
 		 if(body){
-			 if (body.error) {
-			        place = 'Over The Ocean';
-			      } else if (body.display_name) {
-			        place = body.display_name;
-			      }
+// 			 if (body.error) {
+// 			        place = 'Over The Ocean';
+// 			      } else if (body.display_name) {
+// 			        place = body.display_name;
+// 			      }
+       place = body;
 		 }
-//       if(place == "";){place = 'end';}
+    if(res){
+    place = res;
+    }
 	 });
 }
 
