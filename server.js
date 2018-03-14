@@ -6,7 +6,8 @@ const request = require('request');
 const app = express();
 const router = express.Router();
 const twitterService = new twit(twitConfig);
-
+const googleConfig = require("./googleConfig");
+const googleMapsClient = require('@google/maps').createClient(googleConfig);
 const port = process.env.PORT || 8080;
 
 app.use('/otter-api', router);
@@ -48,21 +49,17 @@ function updateIss(){
 }
 
 function updatePlace(){
-	
-	 request('https://nominatim.openstreetmap.org/reverse?lat=' + lat + '&lon=' + lon + '&format=json', { json: true }, (err, res, body) => {
-		 if(err){place = err;}
-		 if(body){
-// 			 if (body.error) {
-// 			        place = 'Over The Ocean';
-// 			      } else if (body.display_name) {
-// 			        place = body.display_name;
-// 			      }
-       place = body;
-		 }
-    if(res){
-    place = res;
-    }
-	 });
+  
+	    googleMapsClient.reverseGeocode({
+      latlng: lat + "," + lon,
+      result_type: "administrative_area_level_1"
+      }, function(err, response) {
+        if (response.json.results.length > 0){
+          place = JSON.stringify(response.json.results[0].formatted_address)
+        } else {
+          place = JSON.stringify("Over The Ocean");
+        }
+      });
 }
 
 function updateTweets(){
