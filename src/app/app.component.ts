@@ -35,34 +35,34 @@ export class AppComponent implements OnInit, OnDestroy {
     this.p5Instance = new p5(this.sketch);
     const display_timer = Observable.timer(0, 12000);
     const pos_timer = Observable.timer(0, 3000);
-//     this.refreshPos = pos_timer.subscribe(() => {
-//       this.updatePos();
-//     });
-//     this.refreshDisplay = display_timer.subscribe(() => {
-//       this.updateDisplay();
-//     });
+    this.refreshPos = pos_timer.subscribe(() => {
+      this.updatePos();
+    });
+    this.refreshDisplay = display_timer.subscribe(() => {
+      this.updateDisplay();
+    });
   }
 
   ngOnDestroy() {
     this.p5Instance.remove();
     this.refreshPos.unsubscribe();
-//     this.refreshDisplay.unsubscribe();
+    this.refreshDisplay.unsubscribe();
   }
 
-//   updateDisplay() {
-//   this.restService.getDisplay().subscribe( (data: DisplayObj) => {
-//     this.tweets = data.tweets;
-//     this.place = data.place;
-//     this.loading = false;
-//   });
-//   }
+  updateDisplay() {
+  this.restService.getDisplay().subscribe( (data: DisplayObj) => {
+    this.tweets = data.tweets;
+    this.place = data.place;
+    this.loading = false;
+  });
+  }
 
-//   updatePos() {
-//   this.restService.getPosition().subscribe( (data: PositionObj) => {
-//     this.position = data;
-//     console.log(1);
-//   });
-//   }
+  updatePos() {
+  this.restService.getPosition().subscribe( (data: PositionObj) => {
+    this.position = data;
+    console.log(1);
+  });
+  }
 
 
   sketch(p: p5) {
