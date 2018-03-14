@@ -27,7 +27,7 @@ var init = 0;
 // updateIss();
 
 setInterval(updateIss, 1 * 1000);
-// setInterval(updatePlace, 10 * 1000);
+setInterval(updatePlace, 10 * 1000);
 setInterval(updateTweets, 10 * 1000);
 
 function updateIss(){
@@ -39,7 +39,7 @@ function updateIss(){
 			 lon = body.longitude;
 			 
 			 if(init == 0){
-// 				 updatePlace();
+				 updatePlace();
 				 updateTweets();
 				 init = 1;
 			 }
@@ -47,19 +47,19 @@ function updateIss(){
 	 });
 }
 
-// function updatePlace(){
+function updatePlace(){
 	
-// 	 request('https://nominatim.openstreetmap.org/reverse?lat=' + lat + '&lon=' + lon + '&format=json', { json: true }, (err, res, body) => {
-// 		 if(err){console.log(2,err);}
-// 		 if(body){
-// 			 if (body.error) {
-// 			        place = 'Over The Ocean';
-// 			      } else if (body.display_name) {
-// 			        place = body.display_name;
-// 			      }
-// 		 }
-// 	 });
-// }
+	 request('https://nominatim.openstreetmap.org/reverse?lat=' + lat + '&lon=' + lon + '&format=json', { json: true }, (err, res, body) => {
+		 if(err){console.log(2,err);}
+		 if(body){
+			 if (body.error) {
+			        place = 'Over The Ocean';
+			      } else if (body.display_name) {
+			        place = body.display_name;
+			      }
+		 }
+	 });
+}
 
 function updateTweets(){
 	
