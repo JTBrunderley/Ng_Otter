@@ -2,13 +2,14 @@
 
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import 'p5';
-import {IssObject} from './models/iss-object.model';
 import {Observable} from 'rxjs/Observable';
 import {Subscription} from 'rxjs/Subscription';
 import {RestService} from './services/rest.service';
 import 'rxjs/add/observable/timer';
 import {DataTable} from 'primeng/primeng';
 import {Tweet} from './models/tweet.model';
+import {PositionObj} from './models/position.model';
+import {DisplayObj} from './models/displayObj.model';
 
 @Component({
   selector: 'app-root',
@@ -21,10 +22,10 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   p5Instance: p5;
-  refreshIssPos: Subscription;
-  refreshTweets: Subscription;
-  iss_lat: number;
-  iss_lon: number;
+  refreshPos: Subscription;
+  refreshDisplay: Subscription;
+  position: PositionObj;
+  display: DisplayObj;
   place: string;
   tweets: Tweet[];
   loading: boolean;
@@ -33,46 +34,32 @@ export class AppComponent implements OnInit, OnDestroy {
     this.tweets = new Array<Tweet>();
     this.loading = true;
     this.p5Instance = new p5(this.sketch);
-    const twit_timer = Observable.timer(0, 12000);
-    const iss_timer = Observable.timer(0, 3000);
-    this.refreshIssPos = iss_timer.subscribe(() => {
-      this.updateIss();
+    const display_timer = Observable.timer(0, 12000);
+    const pos_timer = Observable.timer(0, 3000);
+    this.refreshPos = pos_timer.subscribe(() => {
+      this.updatePos();
     });
-    this.refreshTweets = twit_timer.subscribe(() => {
-      this.getTweets();
+    this.refreshDisplay = display_timer.subscribe(() => {
+      this.updateDisplay();
     });
   }
 
   ngOnDestroy() {
     this.p5Instance.remove();
-    this.refreshIssPos.unsubscribe();
+    this.refreshPos.unsubscribe();
+    this.refreshDisplay.unsubscribe();
   }
 
-  updateIss() {
-    this.restService.getIss().subscribe((iss: IssObject) => {
-      this.iss_lat = iss.latitude;
-      this.iss_lon = iss.longitude;
-      this.updatePlace();
-    });
+  updateDisplay() {
+  this.restService.getDisplay().subscribe( (data: DisplayObj) => {
+    this.display = data;
+  });
   }
 
-  updatePlace() {
-    this.restService.getPlace(this.iss_lat, this.iss_lon).subscribe((data: any) => {
-      if (data.error) {
-        this.place = 'Over The Ocean';
-      } else if (data.display_name) {
-        this.place = data.display_name;
-      }
-    });
-  }
-
-
-  getTweets() {
-   this.restService.getTweets(this.iss_lat, this.iss_lon).subscribe((datas: Tweet[]) => {
-     this.tweets = datas;
-     this.loading = false; } );
-//     this.tweets = [{user: 'temp', tweet: 'tweet'}];
-//     this.loading = false;
+  updatePos() {
+  this.restService.getPosition().subscribe( (data: PositionObj) => {
+    this.position = data;
+  });
   }
 
 
@@ -115,10 +102,10 @@ export class AppComponent implements OnInit, OnDestroy {
         p.loadJSON('https://api.wheretheiss.at/v1/satellites/25544', gotLatLon);
       });
     }
-    function gotLatLon(data: IssObject) {
+    function gotLatLon(data: PositionObj) {
       const r = p.width / 3;
-      lat = p.radians(data.latitude);
-      lon = p.radians(data.longitude);
+      lat = p.radians(data.lat);
+      lon = p.radians(data.lon);
       x = r * p.cos(lat) * p.sin(lon + p.radians(180));
       y = r * 1.0625 * p.sin(-lat);
       z = r * p.cos(lat) * p.cos(lon + p.radians(180));

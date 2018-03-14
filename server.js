@@ -2,14 +2,13 @@ const express = require('express');
 const http = require('http');
 const twit = require('twit');
 const twitConfig = require("./twitConfig");
-
+const request = require('request');
 const app = express();
 const router = express.Router();
 const twitterService = new twit(twitConfig);
 
 const port = process.env.PORT || 8080;
 
-//app.use(express.static(__dirname + '/dist'));
 app.use('/otter-api', router);
 app.use(express.static(__dirname + '/dist'));
 
@@ -19,31 +18,80 @@ app.get('*', (req, res) => {
 
 app.listen(8080);
 
+setInterval(updateIss, 1 * 1000);
+setInterval(updatePlace, 10 * 1000);
+setInterval(updateTweets, 10 * 1000);
 
+var tweets = [];
+var place = "";
+var lat = 0;
+var lon = 0;
+var init = 0;
 
-router.get('/tweets', function(req, res){
-  
-//   fetch('https://api.wheretheiss.at/v1/satellites/25544')
-//     .then(response => response.json())
-//     .then(data => {
-//         res.json({user: 'test' , tweet: data.timestamp});
-//     });
-  
-	var lat = req.query.lat;
-	var lon = req.query.lon;
+updateIss();
+
+function updateIss(){
+	
+	 request('https://api.wheretheiss.at/v1/satellites/25544', { json: true }, (err, res, body) => {
+		 if(err){console.log(err);}
+		 if(body){
+			 lat = body.latitude;
+			 lon = body.longitude;
+			 
+			 if(init == 0){
+				 updatePlace();
+				 updateTweets();
+				 init = 1;
+			 }
+		 }
+	 });
+}
+
+function updatePlace(){
+	
+	 request('https://nominatim.openstreetmap.org/reverse?lat=' + lat + '&lon=' + lon + '&format=json', { json: true }, (err, res, body) => {
+		 if(err){console.log(err);}
+		 if(body){
+			 if (body.error) {
+			        place = 'Over The Ocean';
+			      } else if (body.display_name) {
+			        place = body.display_name;
+			      }
+		 }
+	 });
+}
+
+function updateTweets(){
+	
 	var query = "geocode:" + lat + "," + lon + ",100mi -from:googuns_lulz -from:_grammar_ -jeff_steinport";
 	twitterService.get('search/tweets',{q: query, count: 12}, function(err, data, response){
-		var tweets = [];
+		var newtweets = [];
 		if (data){
 			for (var i = 0; i < data.statuses.length; i++){
-				tweets.push({user: data.statuses[i].user.screen_name , tweet: data.statuses[i].text});
+				newtweets.push({user: data.statuses[i].user.screen_name , tweet: data.statuses[i].text});
 			}
-			if (data.statuses.length == 0) {tweets.push({user:"OTTER_SYS", tweet: 'No New Tweets Located'});}
-			res.json(tweets);
+			if (data.statuses.length == 0) {newtweets.push({user:"OTTER_SYS", tweet: 'No New Tweets Located'});}
+			tweets = newtweets;
 		} 
 		if (err){ console.log(err) };
  });
+	
+}
+
+router.get('/display', function(req, res){
+  
+	let displayObj = {place: place, tweets: tweets};
+	res.json(displayObj);
+
 });
+
+router.get('/position', function(req, res){
+	  
+	let posObj = {lat: lat, lon: lon};
+	res.json(posObj);
+
+});
+
 
 
 const server = http.createServer(app);
