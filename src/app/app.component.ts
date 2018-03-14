@@ -21,46 +21,46 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(public restService: RestService) {
   }
 
-//   p5Instance: p5;
-//   refreshPos: Subscription;
-//   refreshDisplay: Subscription;
-//   position: PositionObj;
-//   tweets: Tweet[];
-//   place: string;
-//   loading: boolean;
+  p5Instance: p5;
+  refreshPos: Subscription;
+  refreshDisplay: Subscription;
+  position: PositionObj;
+  tweets: Tweet[];
+  place: string;
+  loading: boolean;
 
   ngOnInit() {
-//     this.loading = false;
+    this.loading = true;
 //     this.p5Instance = new p5(this.sketch);
-//     const display_timer = Observable.timer(0, 12000);
-//     const pos_timer = Observable.timer(0, 3000);
-//     this.refreshPos = pos_timer.subscribe(() => {
-//       this.updatePos();
-//     });
-//     this.refreshDisplay = display_timer.subscribe(() => {
-//       this.updateDisplay();
-//     });
+    const display_timer = Observable.timer(0, 12000);
+    const pos_timer = Observable.timer(0, 3000);
+    this.refreshPos = pos_timer.subscribe(() => {
+      this.updatePos();
+    });
+    this.refreshDisplay = display_timer.subscribe(() => {
+      this.updateDisplay();
+    });
   }
 
   ngOnDestroy() {
 //     this.p5Instance.remove();
-//     this.refreshPos.unsubscribe();
-//     this.refreshDisplay.unsubscribe();
+    this.refreshPos.unsubscribe();
+    this.refreshDisplay.unsubscribe();
   }
 
-//   updateDisplay() {
-//   this.restService.getDisplay().subscribe( (data: DisplayObj) => {
-//     this.tweets = data.tweets;
-//     this.place = data.place;
-//     this.loading = false;
-//   });
-//   }
+  updateDisplay() {
+  this.restService.getDisplay().subscribe( (data: DisplayObj) => {
+    this.tweets = data.tweets;
+    this.place = data.place;
+    this.loading = false;
+  });
+  }
 
-//   updatePos() {
-//   this.restService.getPosition().subscribe( (data: PositionObj) => {
-//     this.position = data;
-//   });
-//   }
+  updatePos() {
+  this.restService.getPosition().subscribe( (data: PositionObj) => {
+    this.position = data;
+  });
+  }
 
 
 //   sketch(p: p5) {
