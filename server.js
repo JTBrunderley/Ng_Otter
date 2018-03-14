@@ -18,34 +18,34 @@ app.get('*', (req, res) => {
 
 app.listen(8080);
 
-// var tweets = [];
-// var place = "";
-// var lat = 0;
-// var lon = 0;
-// var init = 0;
+var tweets = [];
+var place = "";
+var lat = 0;
+var lon = 0;
+var init = 0;
 
 // updateIss();
 
-// setInterval(updateIss, 1 * 1000);
+setInterval(updateIss, 1 * 1000);
 // setInterval(updatePlace, 10 * 1000);
 // setInterval(updateTweets, 10 * 1000);
 
-// function updateIss(){
+function updateIss(){
 	
-// 	 request('https://api.wheretheiss.at/v1/satellites/25544', { json: true }, (err, res, body) => {
-// 		 if(err){console.log(1,err);}
-// 		 if(body){
-// 			 lat = body.latitude;
-// 			 lon = body.longitude;
+	 request('https://api.wheretheiss.at/v1/satellites/25544', { json: true }, (err, res, body) => {
+		 if(err){console.log(1,err);}
+		 if(body){
+			 lat = body.latitude;
+			 lon = body.longitude;
 			 
-// 			 if(init == 0){
-// // 				 updatePlace();
+			 if(init == 0){
+// 				 updatePlace();
 // 				 updateTweets();
-// 				 init = 1;
-// 			 }
-// 		 }
-// 	 });
-// }
+				 init = 1;
+			 }
+		 }
+	 });
+}
 
 // function updatePlace(){
 	
