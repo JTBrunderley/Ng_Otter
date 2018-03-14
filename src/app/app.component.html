@@ -10,8 +10,8 @@
       <div id="map"></div>
     </td>
     <td width="65%" style="color: #55acee" valign="top" align="left">
-            <p-dataTable #dt [value]="display.tweets" [loading]="loading" loadingIcon="fa-twitter">
-              <p-header>{{this.display.place}}</p-header>
+            <p-dataTable #dt [value]="tweets" [loading]="loading" loadingIcon="fa-twitter">
+              <p-header>{{this.place}}</p-header>
               <p-column field='user' header="UserName:" [bodyStyle]="{'text-align': 'center'}"
                         [headerStyle]="{'font-weight': '900', 'width': '20%'}"></p-column>
               <p-column field='tweet' header="Tweet:" [bodyStyle]="{'text-align': 'center'}"
