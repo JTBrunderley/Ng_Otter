@@ -34,7 +34,7 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.lightSketch = true;
     this.loading = true;
-    this.p5Instance = new p5(this.sketchLight);
+    this.p5Instance = new p5(this.sketchDark);
     const display_timer = Observable.timer(0, 12000);
     const pos_timer = Observable.timer(0, 3000);
     this.refreshPos = pos_timer.subscribe(() => {
@@ -67,13 +67,13 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   toggleMap(){
-    if(!this.lightSketch){
-      this.p5Instance.remove();
-      this.p5Instance = new p5(this.sketchDark);
-    } else {
-        this.p5Instance.remove();
-        this.p5Instance = new p5(this.sketchLight);
-    }
+//     if(!this.lightSketch){
+//       this.p5Instance.remove();
+//       this.p5Instance = new p5(this.sketchDark);
+//     } else {
+//         this.p5Instance.remove();
+//         this.p5Instance = new p5(this.sketchLight);
+//     }
   }
 
   sketchDark(p: p5) {
