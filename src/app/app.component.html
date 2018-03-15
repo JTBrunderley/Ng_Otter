@@ -8,7 +8,7 @@
     <td color="white" width="35%" align="center" valign="top">
       <h3>Lat:&nbsp;{{this.lat}}&nbsp;&nbsp;&nbsp;Lon:&nbsp;{{this.lon}}</h3>
       <div id="map"></div>
-      <h3>Light&nbsp;<p-inputSwitch [(ngModel)]="this.lightSketch"></p-inputSwitch>&nbsp;Dark</h3>
+      <h3>Light&nbsp;<p-inputSwitch (onChange)="toggleMap()"[(ngModel)]="this.lightSketch"></p-inputSwitch>&nbsp;Dark</h3>
     </td>
     <td width="65%" style="color: #55acee" valign="top" align="left">
             <p-dataTable #dt [value]="tweets" [loading]="loading" loadingIcon="fa-twitter">
