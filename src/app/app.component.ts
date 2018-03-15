@@ -29,10 +29,12 @@ export class AppComponent implements OnInit, OnDestroy {
   tweets: Tweet[];
   place: string;
   loading: boolean;
+  lightSketch: boolean;
 
   ngOnInit() {
+    this.lightSketch = true;
     this.loading = true;
-    this.p5Instance = new p5(this.sketch);
+    this.p5Instance = new p5(this.sketchLight);
     const display_timer = Observable.timer(0, 12000);
     const pos_timer = Observable.timer(0, 3000);
     this.refreshPos = pos_timer.subscribe(() => {
@@ -65,7 +67,56 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
 
-  sketch(p: p5) {
+  sketchDark(p: p5) {
+    let img: p5.Image;
+    let x: number;
+    let y: number;
+    let z: number;
+    let lat: number;
+    let lon: number;
+    let refTimer: Subscription;
+    p.preload = function () {
+      img = p.loadImage('../assets/images/worldtex1.jpg');
+    };
+    p.setup = function () {
+      const density = p.displayDensity();
+      p.pixelDensity(density);
+      p.frameRate(60);
+      const canvas: any = p.createCanvas(600, 475, p.WEBGL);
+      canvas.parent('map');
+      refresh();
+    };
+    p.draw = function () {
+      p.background(0, 0, 0, 0);
+      p.ambientLight(255, 255, 255);
+
+      p.rotateY(p.PI);
+      p.rotateX(lat);
+      p.rotateY(lon * -1);
+      p.texture(img);
+      p.sphere(p.width / 3, 24, 24);
+      p.translate(x, y, z);
+      p.fill(204, 0, 51);
+      const d = p.map(p.sin((p.frameCount / 200) * p.TAU), -1, 1, 1, 4);
+      p.sphere(d);
+    };
+    function refresh() {
+      const timer = Observable.timer(0, 3000);
+      refTimer = timer.subscribe(() => {
+        p.loadJSON('https://api.wheretheiss.at/v1/satellites/25544', gotLatLon);
+      });
+    }
+    function gotLatLon(data: PositionObj) {
+      const r = p.width / 3;
+      lat = p.radians(data.latitude);
+      lon = p.radians(data.longitude);
+      x = r * p.cos(lat) * p.sin(lon + p.radians(180));
+      y = r * 1.0625 * p.sin(-lat);
+      z = r * p.cos(lat) * p.cos(lon + p.radians(180));
+    }
+  }
+  
+    sketchLight(p: p5) {
     let img: p5.Image;
     let x: number;
     let y: number;
