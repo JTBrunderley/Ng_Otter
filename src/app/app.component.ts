@@ -66,6 +66,9 @@ export class AppComponent implements OnInit, OnDestroy {
   });
   }
 
+  toggleMap(){
+    console.log(this.lightSketch);
+  }
 
   sketchDark(p: p5) {
     let img: p5.Image;
@@ -164,4 +167,5 @@ export class AppComponent implements OnInit, OnDestroy {
       z = r * p.cos(lat) * p.cos(lon + p.radians(180));
     }
   }
+  
 }
