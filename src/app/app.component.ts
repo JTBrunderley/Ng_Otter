@@ -68,8 +68,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
   toggleMap(){
     if(!this.lightSketch){
+      this.p5Instance.remove();
       this.p5Instance = new p5(this.sketchDark);
     } else {
+        this.p5Instance.remove();
         this.p5Instance = new p5(this.sketchLight);
     }
   }
@@ -83,7 +85,7 @@ export class AppComponent implements OnInit, OnDestroy {
     let lon: number;
     let refTimer: Subscription;
     p.preload = function () {
-      img = p.loadImage('../assets/images/worldtex1.jpg');
+      img = p.loadImage('../assets/images/worldtex.jpg');
     };
     p.setup = function () {
       const density = p.displayDensity();
