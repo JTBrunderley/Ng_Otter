@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import {RestService} from './services/rest.service';
 import {HttpUtil} from './helpers/http-util';
 import {HttpClientModule} from '@angular/common/http';
-import {DataTableModule, SharedModule, InputSwitchModule} from 'primeng/primeng';
+import {DataTableModule, SharedModule} from 'primeng/primeng';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
@@ -23,8 +23,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     FormsModule,
     ReactiveFormsModule,
     DataTableModule,
-    SharedModule,
-    InputSwitchModule
+    SharedModule
   ],
   providers: [RestService, HttpUtil],
   bootstrap: [AppComponent]
