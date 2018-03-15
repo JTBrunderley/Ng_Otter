@@ -68,9 +68,13 @@ export class AppComponent implements OnInit, OnDestroy {
 
   toggleMap(){
     if(!this.lightSketch){
+      this.p5Instance.remove()
+      this.p5Instance = null;
       this.p5Instance = new p5(this.sketchDark);
     } else {
-      this.p5Instance = new p5(this.sketchDark);
+        this.p5Instance.remove()
+        this.p5Instance = null;
+        this.p5Instance = new p5(this.sketchDark);
     }
   }
 
