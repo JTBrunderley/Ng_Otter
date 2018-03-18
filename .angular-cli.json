@@ -21,9 +21,7 @@
       "styles": [
         "styles.css",
         "../node_modules/primeng/resources/primeng.min.css",
-        "../node_modules/primeng/resources/themes/darkness/theme.css",
-        "../node_modules/font-awesome/css/font-awesome.min.css"
-
+        "../node_modules/primeng/resources/themes/darkness/theme.css"
       ],
       "scripts": [
         "../node_modules/p5/lib/p5.min.js",
