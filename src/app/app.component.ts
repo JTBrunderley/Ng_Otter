@@ -73,8 +73,8 @@ export class AppComponent implements OnInit, OnDestroy {
     let x: number;
     let y: number;
     let z: number;
-    let lat: number;
-    let lon: number;
+    let lat: number = 0;
+    let lon: number = 0;
     let refTimer: Subscription;
     let canvas: any;
     sketch.preload = function () {
@@ -110,7 +110,12 @@ export class AppComponent implements OnInit, OnDestroy {
       const timer = Observable.timer(0, 5000);
       refTimer = timer.subscribe(() => {
 //         sketch.loadJSON('https://api.wheretheiss.at/v1/satellites/25544', gotLatLon);
-        gotLatLon();
+      const r = sketch.width * 0.4;
+//       lat = sketch.radians(data.latitude);
+//       lon = sketch.radians(data.longitude);
+      x = r * sketch.cos(lat) * sketch.sin(lon + sketch.radians(180));
+      y = r * 1.0625 * sketch.sin(-lat);
+      z = r * sketch.cos(lat) * sketch.cos(lon + sketch.radians(180));
       });
     }
 //     function gotLatLon(data: PositionObj) {
