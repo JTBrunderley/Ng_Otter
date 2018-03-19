@@ -73,8 +73,8 @@ export class AppComponent implements OnInit, OnDestroy {
     let x: number;
     let y: number;
     let z: number;
-//     let lat: number;
-//     let lon: number;
+    let lat: number;
+    let lon: number;
     let refTimer: Subscription;
     let canvas: any;
     sketch.preload = function () {
