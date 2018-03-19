@@ -99,8 +99,8 @@ export class AppComponent implements OnInit, OnDestroy {
       sketch.ambientLight(255, 255, 255);
 
       sketch.rotateY(sketch.PI);
-      sketch.rotateX(lat);
-      sketch.rotateY(lon * -1);
+      sketch.rotateX(sketch.lat);
+      sketch.rotateY(sketch.lon * -1);
       sketch.texture(img);
       sketch.sphere(sketch.width * 0.4, 24, 24);
       sketch.translate(x, y, z);
@@ -111,11 +111,11 @@ export class AppComponent implements OnInit, OnDestroy {
     function refresh() {
       const timer = Observable.timer(0, 5000);
       refTimer = timer.subscribe(() => {
-        console.log('inside ', lat, lon);
+        console.log('inside ', sketch.lat, sketch.lon);
         const r = sketch.width * 0.4;
-        x = r * sketch.cos(lat) * sketch.sin(lon + sketch.radians(180));
-        y = r * 1.0625 * sketch.sin(-lat);
-        z = r * sketch.cos(lat) * sketch.cos(lon + sketch.radians(180));
+        x = r * sketch.cos(sketch.lat) * sketch.sin(sketch.lon + sketch.radians(180));
+        y = r * 1.0625 * sketch.sin(-sketch.lat);
+        z = r * sketch.cos(sketch.lat) * sketch.cos(sketch.lon + sketch.radians(180));
       });
     }
     
