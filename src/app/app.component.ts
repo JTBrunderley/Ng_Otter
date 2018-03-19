@@ -62,8 +62,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
   updatePos() {
   this.restService.getPosition().subscribe( (data: PositionObj) => {
-    this.p5Instance1.lat = data.latitude;
-    this.p5Instance1.lon = data.longitude;
+//     this.p5Instance1.lat = data.latitude;
+//     this.p5Instance1.lon = data.longitude;
   });
   }
 
@@ -109,15 +109,15 @@ export class AppComponent implements OnInit, OnDestroy {
     function refresh() {
       const timer = Observable.timer(0, 5000);
       refTimer = timer.subscribe(() => {
-//         sketch.loadJSON('https://api.wheretheiss.at/v1/satellites/25544', gotLatLon);
-        gotLatLon();
+        sketch.loadJSON('https://api.wheretheiss.at/v1/satellites/25544', gotLatLon);
+//         gotLatLon();
       });
     }
-//     function gotLatLon(data: PositionObj) {
-      function gotLatLon() {
+    function gotLatLon(data: PositionObj) {
+//       function gotLatLon() {
       const r = sketch.width * 0.4;
-//       lat = sketch.radians(data.latitude);
-//       lon = sketch.radians(data.longitude);
+      lat = sketch.radians(data.latitude);
+      lon = sketch.radians(data.longitude);
       x = r * sketch.cos(lat) * sketch.sin(lon + sketch.radians(180));
       y = r * 1.0625 * sketch.sin(-lat);
       z = r * sketch.cos(lat) * sketch.cos(lon + sketch.radians(180));
