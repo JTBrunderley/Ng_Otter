@@ -62,8 +62,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
   updatePos() {
   this.restService.getPosition().subscribe( (data: PositionObj) => {
-    this.p5Instance1.lat = this.p5Instance2.radians(data.latitude);
-    this.p5Instance1.lon = this.p5Instance2.radians(data.longitude);
+    this.p5Instance1.lat = this.p5Instance1.radians(data.latitude);
+    this.p5Instance1.lon = this.p5Instance1.radians(data.longitude);
+    console.log(this.p5Instance1.lat,' : ', this.p5Instance1.lon);
+    
   });
   }
 
