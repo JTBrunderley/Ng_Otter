@@ -19,9 +19,10 @@ app.get('*', (req, res) => {
 
 var tweets = [];
 var place;
-var lat = 0;
-var lon = 0;
+var lat;
+var lon;
 var init = 0;
+var error;
 
 updateIss();
 
@@ -52,13 +53,14 @@ function updatePlace(){
       latlng: lat + "," + lon,
       result_type: "administrative_area_level_1"
       }, function(err, response) {
-        if (err){place = err;}
+        if (err){error = err;}
         if (response.json.results.length > 0){
-          // place = JSON.stringify(response.json.results[0].formatted_address)
 					place = response.json.results[0].formatted_address;
+          error = null;
 
         } else {
           place = lat.toFixed(3) + ", " + lon.toFixed(3);
+          error = null;
         }
       });
 }
@@ -82,7 +84,7 @@ function updateTweets(){
 
 router.get('/display', function(req, res){
 
-	let displayObj = {place: place, tweets: tweets};
+	let displayObj = {place: place, tweets: tweets, err: error};
 	res.json(displayObj);
 
 });
