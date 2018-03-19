@@ -110,7 +110,7 @@ export class AppComponent implements OnInit, OnDestroy {
       const timer = Observable.timer(0, 5000);
       refTimer = timer.subscribe(() => {
 //         sketch.loadJSON('https://api.wheretheiss.at/v1/satellites/25544', gotLatLon);
-        sketch.gotLatLon();
+        gotLatLon();
       });
     }
 //     function gotLatLon(data: PositionObj) {
