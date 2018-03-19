@@ -56,6 +56,7 @@ export class AppComponent implements OnInit, OnDestroy {
   this.restService.getDisplay().subscribe( (data: DisplayObj) => {
     this.tweets = data.tweets;
     this.place = data.place;
+    if (data.err) {console.log(data.err);}
     this.loading = false;
   });
   }
