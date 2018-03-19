@@ -52,6 +52,7 @@ function updatePlace(){
       latlng: lat + "," + lon,
       result_type: "administrative_area_level_1"
       }, function(err, response) {
+        if (err){place = err;}
         if (response.json.results.length > 0){
           // place = JSON.stringify(response.json.results[0].formatted_address)
 					place = response.json.results[0].formatted_address;
