@@ -11,9 +11,9 @@ export class RestService {
   }
 
  getDisplay(): Observable<DisplayObj> {
-   return this.http.get<any>(`http://localhost:8080/otter-api/display`);
+   return this.http.get<any>(`https://ng-otter.herokuapp.com/otter-api/display`);
  }
  getPosition(): Observable<PositionObj> {
-   return this.http.get<any>(`http://localhost:8080/otter-api/position`);
+   return this.http.get<any>(`https://ng-otter.herokuapp.com/otter-api/position`);
  }
 }
