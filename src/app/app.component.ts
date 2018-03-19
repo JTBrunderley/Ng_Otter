@@ -64,8 +64,10 @@ export class AppComponent implements OnInit, OnDestroy {
   this.restService.getPosition().subscribe( (data: PositionObj) => {
     this.p5Instance1.lat = this.p5Instance1.radians(data.latitude);
     this.p5Instance1.lon = this.p5Instance1.radians(data.longitude);
-    console.log(this.p5Instance1.lat,' : ', this.p5Instance1.lon);
-    
+    const r = this.p5Instance1.width * 0.4;
+    this.p5Instance1.x = r * this.p5Instance1.cos(this.p5Instance1.lat) * this.p5Instance1.sin(this.p5Instance1.lon + this.p5Instance1.radians(180));
+    this.p5Instance1.y = r * 1.0625 * this.p5Instance1.sin(-this.p5Instance1.lat);
+    this.p5Instance1.z = r * this.p5Instance1.cos(this.p5Instance1.lat) * this.p5Instance1.cos(this.p5Instance1.lon + this.p5Instance1.radians(180));
   });
   }
 
@@ -75,8 +77,8 @@ export class AppComponent implements OnInit, OnDestroy {
     let x: number;
     let y: number;
     let z: number;
-    let lat: number = 0;
-    let lon: number = 0;
+    let lat: number;
+    let lon: number;
     let refTimer: Subscription;
     let canvas: any;
     sketch.preload = function () {
@@ -92,7 +94,6 @@ export class AppComponent implements OnInit, OnDestroy {
         canvas = sketch.createCanvas(sketch.windowWidth * 0.6, sketch.windowWidth * 0.6, sketch.WEBGL);
       }
       canvas.parent('map');
-      refresh();
     };
     sketch.draw = function () {
       sketch.background(0, 0, 0, 0);
@@ -108,17 +109,6 @@ export class AppComponent implements OnInit, OnDestroy {
       const d = sketch.map(sketch.sin((sketch.frameCount / 200) * sketch.TAU), -1, 1, 1, 4);
       sketch.sphere(d);
     };
-    function refresh() {
-      const timer = Observable.timer(0, 5000);
-      refTimer = timer.subscribe(() => {
-        console.log('inside ', sketch.lat, sketch.lon);
-        const r = sketch.width * 0.4;
-        x = r * sketch.cos(sketch.lat) * sketch.sin(sketch.lon + sketch.radians(180));
-        y = r * 1.0625 * sketch.sin(-sketch.lat);
-        z = r * sketch.cos(sketch.lat) * sketch.cos(sketch.lon + sketch.radians(180));
-      });
-    }
-    
     sketch.windowResized = function () {
       if (sketch.windowWidth > 800) {
         sketch.resizeCanvas(sketch.windowWidth * 0.3, sketch.windowWidth * 0.3);
