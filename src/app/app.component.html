@@ -1,24 +1,24 @@
-<table>
-  <tr>
-    <td><img src="../assets/images/otter_logo.png"><br><img src="../assets/images/tag_line.png"></td>
-  </tr>
-</table>
-<table width=95%>
-  <tr>
-    <td color="white" width="35%" align="center" valign="top">
-      <h3>Lat:&nbsp;{{this.lat}}&nbsp;&nbsp;&nbsp;Lon:&nbsp;{{this.lon}}</h3>
-      <div id="map"></div>
-    </td>
-    <td width="65%" style="color: #55acee" valign="top" align="left">
-            <p-dataTable #dt [value]="tweets" [loading]="loading" loadingIcon="fa-twitter">
-              <p-header>{{this.place}}</p-header>
-              <p-column field='user' header="UserName:" [bodyStyle]="{'text-align': 'center'}"
-                        [headerStyle]="{'font-weight': '900', 'width': '20%'}"></p-column>
-              <p-column field='tweet' header="Tweet:" [bodyStyle]="{'text-align': 'center'}"
-                        [headerStyle]="{'font-weight': '900', 'width': '80%'}"></p-column>
-            </p-dataTable>
+<div id="background"></div>
+<header>
+    <h1>OTTER</h1>
+    <h2>Orbital Twitter Traffic Explorer & Repeater</h2>
+ </header>
 
-    </td>
-  </tr>
-</table>
+  <div id="map"></div>
 
+  <table id="table">
+    <tr>
+      <td width="65%" style="color: #55acee" valign="top" align="left">
+        <p-dataTable #dt [value]="tweets" [loading]="loading">
+        <p-header>{{this.place}}</p-header>
+        <p-column field='user' header="User:" [bodyStyle]="{'text-align': 'left'}"
+          [headerStyle]="{'font-weight': '900', 'width': '20%'}"></p-column>
+        <p-column field='tweet' header="Status:" [bodyStyle]="{'text-align': 'left'}"
+          [headerStyle]="{'font-weight': '900', 'width': '80%'}"></p-column>
+        </p-dataTable>
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>

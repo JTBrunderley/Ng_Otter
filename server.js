@@ -25,18 +25,18 @@ var init = 0;
 
 updateIss();
 
-setInterval(updateIss, 1 * 1000);
-setInterval(updatePlace, 12 * 1000);
-setInterval(updateTweets, 12 * 1000);
+setInterval(updateIss, 5 * 1000);
+setInterval(updatePlace, 5 * 1000);
+setInterval(updateTweets, 5 * 1000);
 
 function updateIss(){
-	
+
 	 request('https://api.wheretheiss.at/v1/satellites/25544', { json: true }, (err, res, body) => {
 		 if(err){console.log(err);}
 		 if(body){
 			 lat = body.latitude;
 			 lon = body.longitude;
-			 
+
 			 if(init == 0){
 				 updatePlace();
 				 updateTweets();
@@ -47,21 +47,23 @@ function updateIss(){
 }
 
 function updatePlace(){
-  
+
 	    googleMapsClient.reverseGeocode({
       latlng: lat + "," + lon,
       result_type: "administrative_area_level_1"
       }, function(err, response) {
         if (response.json.results.length > 0){
-          place = JSON.stringify(response.json.results[0].formatted_address)
+          // place = JSON.stringify(response.json.results[0].formatted_address)
+					place = response.json.results[0].formatted_address;
+
         } else {
-          place = JSON.stringify("Over The Ocean");
+          place = lat.toFixed(3) + ", " + lon.toFixed(3);
         }
       });
 }
 
 function updateTweets(){
-	
+
 	var query = "geocode:" + lat + "," + lon + ",100mi -from:googuns_lulz -from:_grammar_ -from:jeff_steinport -from:donkaare";
 	twitterService.get('search/tweets',{q: query, count: 12}, function(err, data, response){
 		var newtweets = [];
@@ -69,35 +71,27 @@ function updateTweets(){
 			for (var i = 0; i < data.statuses.length; i++){
 				newtweets.push({user: data.statuses[i].user.screen_name , tweet: data.statuses[i].text});
 			}
-			if (data.statuses.length == 0) {newtweets.push({user:"OTTER_SYS", tweet: 'No New Tweets Located'});}
+			if (data.statuses.length == 0) {newtweets.push({user:"OTTER_SYS", tweet: 'Quiet on the Surface'});}
 			tweets = newtweets;
-		} 
+		}
 		if (err){ console.log(3,err) };
  });
-	
+
 }
 
 router.get('/display', function(req, res){
-  
+
 	let displayObj = {place: place, tweets: tweets};
 	res.json(displayObj);
 
 });
 
 router.get('/position', function(req, res){
-	  
+
 	let posObj = {latitude: lat, longitude: lon};
 	res.json(posObj);
 
 });
 
-
-
 const server = http.createServer(app);
 server.listen(port, () => console.log('Server is now Running'));
-
-
-
-
-
-
