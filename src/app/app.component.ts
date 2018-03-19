@@ -21,7 +21,7 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(public restService: RestService) {
   }
 
-  p5Instance1: p5;
+  p5Instance1: any;
   p5Instance2: p5;
   refreshPos: Subscription;
   refreshDisplay: Subscription;
