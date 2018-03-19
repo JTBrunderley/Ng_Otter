@@ -78,6 +78,7 @@ export class AppComponent implements OnInit, OnDestroy {
     let lat: number;
     let lon: number;
     let refTimer: Subscription;
+    let canvas: any;
     p.preload = function () {
       img = p.loadImage('../assets/images/globe.jpg');
     };
@@ -86,9 +87,9 @@ export class AppComponent implements OnInit, OnDestroy {
       p.pixelDensity(density);
       p.frameRate(60);
       if (p.windowWidth > 800) {
-        const canvas: any = p.createCanvas(p.windowWidth * 0.3, p.windowWidth * 0.3, p.WEBGL);
+        canvas = p.createCanvas(p.windowWidth * 0.3, p.windowWidth * 0.3, p.WEBGL);
       } else {
-        const canvas: any = p.createCanvas(p.windowWidth * 0.6, p.windowWidth * 0.6, p.WEBGL);
+        canvas = p.createCanvas(p.windowWidth * 0.6, p.windowWidth * 0.6, p.WEBGL);
       }
       canvas.parent('map');
       refresh();
