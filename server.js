@@ -25,7 +25,7 @@ var init = 0;
 
 updateIss();
 
-setInterval(updateIss, 5 * 1000);
+setInterval(updateIss, 1 * 1000);
 setInterval(updatePlace, 5 * 1000);
 setInterval(updateTweets, 5 * 1000);
 
