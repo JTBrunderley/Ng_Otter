@@ -71,7 +71,7 @@ export class AppComponent implements OnInit, OnDestroy {
   });
   }
 
-  map_sketch(sketch) {
+  map_sketch(p) {
 
     let img: p5.Image;
     let x: number;
@@ -81,39 +81,40 @@ export class AppComponent implements OnInit, OnDestroy {
     let lon: number;
     let refTimer: Subscription;
     let canvas: any;
-    sketch.preload = function () {
-      img = sketch.loadImage('../assets/images/globe.jpg');
+    p.preload = function () {
+      img = p.loadImage('../assets/images/globe.jpg');
     };
-    sketch.setup = function () {
-      const density = sketch.displayDensity();
-      sketch.pixelDensity(density);
-      sketch.frameRate(60);
-      if (sketch.windowWidth > 800) {
-        canvas = sketch.createCanvas(sketch.windowWidth * 0.3, sketch.windowWidth * 0.3, sketch.WEBGL);
+    p.setup = function () {
+      const density = p.displayDensity();
+      p.pixelDensity(density);
+      p.frameRate(60);
+      if (p.windowWidth > 800) {
+        canvas = p.createCanvas(p.windowWidth * 0.3, p.windowWidth * 0.3, p.WEBGL);
       } else {
-        canvas = sketch.createCanvas(sketch.windowWidth * 0.6, sketch.windowWidth * 0.6, sketch.WEBGL);
+        canvas = p.createCanvas(p.windowWidth * 0.6, p.windowWidth * 0.6, p.WEBGL);
       }
       canvas.parent('map');
     };
-    sketch.draw = function () {
-      sketch.background(0, 0, 0, 0);
-      sketch.ambientLight(255, 255, 255);
+    
+    p.draw = function () {
+      p.background(0, 0, 0, 0);
+      p.ambientLight(255, 255, 255);
 
-      sketch.rotateY(sketch.PI);
-      sketch.rotateX(sketch.lat);
-      sketch.rotateY(sketch.lon * -1);
-      sketch.texture(img);
-      sketch.sphere(sketch.width * 0.4, 24, 24);
-      sketch.translate(sketch.x, sketch.y, sketch.z);
-      sketch.fill(153, 0, 51);
-      const d = sketch.map(sketch.sin((sketch.frameCount / 200) * sketch.TAU), -1, 1, 1, 4);
-      sketch.sphere(d);
+      p.rotateY(p.PI);
+      p.rotateX(p.lat);
+      p.rotateY(p.lon * -1);
+      p.texture(img);
+      p.sphere(p.width * 0.4, 24, 24);
+      p.translate(p.x, p.y, p.z);
+      p.fill(153, 0, 51);
+      const d = p.map(p.sin((p.frameCount / 200) * p.TAU), -1, 1, 1, 4);
+      p.sphere(d);
     };
-    sketch.windowResized = function () {
-      if (sketch.windowWidth > 800) {
-        sketch.resizeCanvas(sketch.windowWidth * 0.3, sketch.windowWidth * 0.3);
+    p.windowResized = function () {
+      if (p.windowWidth > 800) {
+        p.resizeCanvas(p.windowWidth * 0.3, p.windowWidth * 0.3);
       } else {
-        sketch.resizeCanvas(sketch.windowWidth * 0.6, sketch.windowWidth * 0.6);
+        p.resizeCanvas(p.windowWidth * 0.6, p.windowWidth * 0.6);
       }
     };
   }
