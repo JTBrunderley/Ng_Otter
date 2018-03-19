@@ -104,7 +104,7 @@ export class AppComponent implements OnInit, OnDestroy {
       sketch.rotateY(sketch.lon * -1);
       sketch.texture(img);
       sketch.sphere(sketch.width * 0.4, 24, 24);
-      sketch.translate(x, y, z);
+      sketch.translate(sketch.x, sketch.y, sketch.z);
       sketch.fill(153, 0, 51);
       const d = sketch.map(sketch.sin((sketch.frameCount / 200) * sketch.TAU), -1, 1, 1, 4);
       sketch.sphere(d);
