@@ -124,10 +124,8 @@ export class AppComponent implements OnInit, OnDestroy {
     }
     p.windowResized = function () {
       if (p.windowWidth > 800) {
-//         p.resizeCanvas(p.windowWidth * 0.3, p.windowWidth * 0.3, p.WEBGL);
         p.resizeCanvas(p.windowWidth * 0.3, p.windowWidth * 0.3);
       } else {
-//         p.resizeCanvas(p.windowWidth * 0.6, p.windowWidth * 0.6, p.WEBGL);
         p.resizeCanvas(p.windowWidth * 0.6, p.windowWidth * 0.6);
       }
     };
