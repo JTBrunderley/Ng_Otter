@@ -69,7 +69,7 @@ export class AppComponent implements OnInit, OnDestroy {
   });
   }
 
-  map_sketch(p: p5) {
+  map_sketch(sketch) {
 
     let img: p5.Image;
     let x: number;
@@ -79,54 +79,54 @@ export class AppComponent implements OnInit, OnDestroy {
     let lon: number;
     let refTimer: Subscription;
     let canvas: any;
-    p.preload = function () {
-      img = p.loadImage('../assets/images/globe.jpg');
+    sketch.preload = function () {
+      img = sketch.loadImage('../assets/images/globe.jpg');
     };
-    p.setup = function () {
-      const density = p.displayDensity();
-      p.pixelDensity(density);
-      p.frameRate(60);
-      if (p.windowWidth > 800) {
-        canvas = p.createCanvas(p.windowWidth * 0.3, p.windowWidth * 0.3, p.WEBGL);
+    sketch.setup = function () {
+      const density = sketch.displayDensity();
+      sketch.pixelDensity(density);
+      sketch.frameRate(60);
+      if (sketch.windowWidth > 800) {
+        canvas = sketch.createCanvas(sketch.windowWidth * 0.3, sketch.windowWidth * 0.3, sketch.WEBGL);
       } else {
-        canvas = p.createCanvas(p.windowWidth * 0.6, p.windowWidth * 0.6, p.WEBGL);
+        canvas = sketch.createCanvas(sketch.windowWidth * 0.6, sketch.windowWidth * 0.6, sketch.WEBGL);
       }
       canvas.parent('map');
       refresh();
     };
-    p.draw = function () {
-      p.background(0, 0, 0, 0);
-      p.ambientLight(255, 255, 255);
+    sketch.draw = function () {
+      sketch.background(0, 0, 0, 0);
+      sketch.ambientLight(255, 255, 255);
 
-      p.rotateY(p.PI);
-      p.rotateX(lat);
-      p.rotateY(lon * -1);
-      p.texture(img);
-      p.sphere(p.width * 0.4, 24, 24);
-      p.translate(x, y, z);
-      p.fill(153, 0, 51);
-      const d = p.map(p.sin((p.frameCount / 200) * p.TAU), -1, 1, 1, 4);
-      p.sphere(d);
+      sketch.rotateY(sketch.PI);
+      sketch.rotateX(lat);
+      sketch.rotateY(lon * -1);
+      sketch.texture(img);
+      sketch.sphere(sketch.width * 0.4, 24, 24);
+      sketch.translate(x, y, z);
+      sketch.fill(153, 0, 51);
+      const d = sketch.map(sketch.sin((sketch.frameCount / 200) * sketch.TAU), -1, 1, 1, 4);
+      sketch.sphere(d);
     };
     function refresh() {
       const timer = Observable.timer(0, 5000);
       refTimer = timer.subscribe(() => {
-        p.loadJSON('https://api.wheretheiss.at/v1/satellites/25544', gotLatLon);
+        sketch.loadJSON('https://api.wheretheiss.at/v1/satellites/25544', gotLatLon);
       });
     }
     function gotLatLon(data: PositionObj) {
-      const r = p.width * 0.4;
-      lat = p.radians(data.latitude);
-      lon = p.radians(data.longitude);
-      x = r * p.cos(lat) * p.sin(lon + p.radians(180));
-      y = r * 1.0625 * p.sin(-lat);
-      z = r * p.cos(lat) * p.cos(lon + p.radians(180));
+      const r = sketch.width * 0.4;
+      lat = sketch.radians(data.latitude);
+      lon = sketch.radians(data.longitude);
+      x = r * sketch.cos(lat) * sketch.sin(lon + sketch.radians(180));
+      y = r * 1.0625 * sketch.sin(-lat);
+      z = r * sketch.cos(lat) * sketch.cos(lon + sketch.radians(180));
     }
-    p.windowResized = function () {
-      if (p.windowWidth > 800) {
-        p.resizeCanvas(p.windowWidth * 0.3, p.windowWidth * 0.3);
+    sketch.windowResized = function () {
+      if (sketch.windowWidth > 800) {
+        sketch.resizeCanvas(sketch.windowWidth * 0.3, sketch.windowWidth * 0.3);
       } else {
-        p.resizeCanvas(p.windowWidth * 0.6, p.windowWidth * 0.6);
+        sketch.resizeCanvas(sketch.windowWidth * 0.6, sketch.windowWidth * 0.6);
       }
     };
   }
