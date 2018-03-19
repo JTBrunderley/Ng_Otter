@@ -30,8 +30,10 @@ export class AppComponent implements OnInit, OnDestroy {
   tweets: Tweet[];
   place: string;
   loading: boolean;
+  lightSketch: boolean;
 
   ngOnInit() {
+    this.lightSketch = true;
     this.loading = true;
     this.p5Instance1 = new p5(this.map_sketch);
     this.p5Instance2 = new p5(this.background_sketch);
@@ -67,8 +69,8 @@ export class AppComponent implements OnInit, OnDestroy {
   });
   }
 
-
   map_sketch(p: p5) {
+
     let img: p5.Image;
     let x: number;
     let y: number;
@@ -163,4 +165,5 @@ export class AppComponent implements OnInit, OnDestroy {
       }
     };
   }
+  
 }
