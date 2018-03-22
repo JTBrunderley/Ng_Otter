@@ -83,9 +83,6 @@ export class AppComponent implements OnInit, OnDestroy {
     let canvas: any;
     let loading = true;
     
-//     p.preload = function () {
-//       img = p.loadImage('../assets/images/globe.jpg');
-//     };
     p.setup = function () {
       const density = p.displayDensity();
       p.pixelDensity(density);
