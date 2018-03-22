@@ -143,6 +143,11 @@ export class AppComponent implements OnInit, OnDestroy {
         b.noStroke();
         b.fill(255, 255, 255, a[i]);
         b.ellipse(x[i], y[i], r[i]);
+        x[i] = x[i] - .25;
+        if ( x[i] <= 0) {
+          x[i] = b.windowWidth;
+          y[i] = b.random(b.height);
+        }
       }
     }
 
