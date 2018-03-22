@@ -99,7 +99,7 @@ export class AppComponent implements OnInit, OnDestroy {
     function imageLoaded(image){
       img = image;
       loading = false;
-    };
+    }
     
     p.draw = function () {
       if (loading){
@@ -130,44 +130,66 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   background_sketch(b: p5) {
-    let x = [];
-    let y = [];
-    let r = [];
-    let a = [];
+    const x = [];
+    const y = [];
+    const r = [];
+    const a = [];
+    let img: p5.Image;
+    let loading = true;
 
     b.setup = function () {
       const canvas: any = b.createCanvas(b.windowWidth, b.windowHeight);
       canvas.parent('background');
-      for (let i = 0; i < 400; i++){
+      for (let i = 0; i < 400; i++) {
         x[i] = b.random(b.width);
         y[i] = b.random(b.height);
-        r[i] = b.random(1,4);
-        a[i] = b.random(0,75);
-      }
+        r[i] = b.random(1, 4);
+        a[i] = b.random(0, 75);
+    }
+      b.loadImage('../assets/images/CockpitFullHD.png', imageLoaded);
     };
 
-    b.draw = function () {
-      b.background(44, 47, 51);
-      for (let i = 0; i < 400; i++){
-        b.noStroke();
-        b.fill(255, 255, 255, a[i]);
-        b.ellipse(x[i], y[i], r[i]);
-        x[i] = x[i] - .25;
-        if ( x[i] <= 0) {
-          x[i] = b.windowWidth;
-          y[i] = b.random(b.height);
-        }
-      }
+    function imageLoaded(image) {
+      img = image;
+      loading = false;
     }
+
+    b.draw = function () {
+      if (loading) {
+        b.background(44, 47, 51);
+        for (let i = 0; i < 400; i++) {
+          b.noStroke();
+          b.fill(255, 255, 255, a[i]);
+          b.ellipse(x[i], y[i], r[i]);
+          x[i] = x[i] - .25;
+          if ( x[i] <= 0) {
+            x[i] = b.windowWidth;
+            y[i] = b.random(b.height);
+          }
+        }
+      } else {
+        b.background(44, 47, 51);
+        for (let i = 0; i < 400; i++) {
+          b.noStroke();
+          b.fill(255, 255, 255, a[i]);
+          b.ellipse(x[i], y[i], r[i]);
+          x[i] = x[i] - .25;
+          if ( x[i] <= 0) {
+            x[i] = b.windowWidth;
+            y[i] = b.random(b.height);
+          }
+        }
+        b.image(img, 0, 0);
+      }
+    };
 
     b.windowResized = function () {
       b.resizeCanvas(b.windowWidth, b.windowHeight);
-      for (let i = 0; i < 200; i++){
+      for (let i = 0; i < 200; i++) {
         x[i] = b.random(b.width);
         y[i] = b.random(b.height);
-        r[i] = b.random(1,5);
+        r[i] = b.random(1, 5);
       }
     };
   }
-  
 }
