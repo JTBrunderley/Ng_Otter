@@ -31,7 +31,6 @@ export class AppComponent implements OnInit, OnDestroy {
   lightSketch: boolean;
 
   ngOnInit() {
-    this.lightSketch = true;
     this.loading = true;
     this.p5Instance1 = new p5(this.map_sketch);
     this.p5Instance2 = new p5(this.background_sketch);
@@ -82,9 +81,11 @@ export class AppComponent implements OnInit, OnDestroy {
     let lon: number;
     let refTimer: Subscription;
     let canvas: any;
-    p.preload = function () {
-      img = p.loadImage('../assets/images/globe.jpg');
-    };
+    let loading = true;
+    
+//     p.preload = function () {
+//       img = p.loadImage('../assets/images/globe.jpg');
+//     };
     p.setup = function () {
       const density = p.displayDensity();
       p.pixelDensity(density);
@@ -95,10 +96,19 @@ export class AppComponent implements OnInit, OnDestroy {
         canvas = p.createCanvas(p.windowWidth * 0.6, p.windowWidth * 0.6, p.WEBGL);
       }
       canvas.parent('map');
+      img = p.loadImage('../assets/images/globe.jpg', imageLoaded);
     };
     
+    imageLoaded(){
+    loading = false;
+    }
+    
     p.draw = function () {
+      if (loading){
       p.background(0, 0, 0, 0);
+      p.ambientLight(255, 255, 255);
+      }else() {
+        p.background(0, 0, 0, 0);
       p.ambientLight(255, 255, 255);
 
       p.rotateY(p.PI);
@@ -110,6 +120,7 @@ export class AppComponent implements OnInit, OnDestroy {
       p.fill(153, 0, 51);
       const d = p.map(p.sin((p.frameCount / 200) * p.TAU), -1, 1, 1, 4);
       p.sphere(d);
+      }
     };
     p.windowResized = function () {
       if (p.windowWidth > 800) {
