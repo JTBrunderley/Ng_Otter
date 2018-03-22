@@ -96,11 +96,12 @@ export class AppComponent implements OnInit, OnDestroy {
         canvas = p.createCanvas(p.windowWidth * 0.6, p.windowWidth * 0.6, p.WEBGL);
       }
       canvas.parent('map');
-      img = p.loadImage('../assets/images/globe.jpg', imageLoaded);
+      p.loadImage('../assets/images/globe.jpg', imageLoaded);
     };
     
-    imageLoaded(){
-    loading = false;
+    function imageLoaded(image){
+      img = image;
+      loading = false;
     };
     
     p.draw = function () {
