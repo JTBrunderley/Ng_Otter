@@ -101,7 +101,7 @@ export class AppComponent implements OnInit, OnDestroy {
     
     imageLoaded(){
     loading = false;
-    }
+    };
     
     p.draw = function () {
       if (loading){
