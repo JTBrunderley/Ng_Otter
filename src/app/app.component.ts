@@ -108,7 +108,7 @@ export class AppComponent implements OnInit, OnDestroy {
       if (loading){
       p.background(0, 0, 0, 0);
       p.ambientLight(255, 255, 255);
-      }else() {
+      } else {
         p.background(0, 0, 0, 0);
       p.ambientLight(255, 255, 255);
 
