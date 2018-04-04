@@ -146,7 +146,6 @@ export class AppComponent implements OnInit, OnDestroy {
         r[i] = b.random(1, 4);
         a[i] = b.random(0, 75);
     }
-      b.loadImage('../assets/images/CockpitFullHD.png', imageLoaded);
     };
 
     function imageLoaded(image) {
