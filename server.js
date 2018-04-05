@@ -85,6 +85,8 @@ function updateTweets(){
 router.get('/display', function(req, res){
 
 	let displayObj = {place: place, tweets: tweets, err: error};
+  res.header("Access-Control-Allow-Origin", "*");
+ 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	res.json(displayObj);
 
 });
@@ -92,6 +94,8 @@ router.get('/display', function(req, res){
 router.get('/position', function(req, res){
 
 	let posObj = {latitude: lat, longitude: lon};
+  res.header("Access-Control-Allow-Origin", "*");
+ 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	res.json(posObj);
 
 });
